@@ -24,18 +24,20 @@ import com.github.cpburnz.minecraft_prometheus_exporter.prometheus_exporter.Tags
  * The PrometheusExporterMod class defines the mod.
  */
 @Mod(
-	modid = Tags.MODID,
+	modid = PrometheusExporterMod.MODID,
 	version = Tags.VERSION,
-	name = Tags.MODNAME,
+	name = PrometheusExporterMod.NAME,
 	acceptedMinecraftVersions = "[1.7.10]",
 	acceptableRemoteVersions = "*"
 )
 public class PrometheusExporterMod {
+	public static final String NAME = "Prometheus Exporter";
+	public static final String MODID = "prometheus_exporter";
 
 	/**
 	 * The logger to use.
 	 */
-	public static final Logger LOG = LogManager.getLogger(Tags.MODID);
+	public static final Logger LOG = LogManager.getLogger(MODID);
 
 	/**
 	 * The HTTP server.

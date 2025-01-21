@@ -79,13 +79,13 @@ public class PrometheusExporterMod {
      */
     private void initCollectors() {
         // Collect JVM stats.
-        if (ExporterConfig.jwm_collector) DefaultExports.initialize();
+        if (ExporterConfig.collector.jwm_collector) DefaultExports.initialize();
 
-        if (ExporterConfig.entities) new Entities(this.mc_server).register();
-        if (ExporterConfig.tileentities) new TileEntities(this.mc_server).register();
-        if (ExporterConfig.ticks) new Ticks(this.mc_server).register();
-        if (ExporterConfig.chunks) new Chunks(this.mc_server).register();
-        if (ExporterConfig.players) new Players(this.mc_server).register();
+        if (ExporterConfig.collector.entities) new Entities(this.mc_server).register();
+        if (ExporterConfig.collector.tileentities) new TileEntities(this.mc_server).register();
+        if (ExporterConfig.collector.ticks) new Ticks(this.mc_server).register();
+        if (ExporterConfig.collector.chunks) new Chunks(this.mc_server).register();
+        if (ExporterConfig.collector.players) new Players(this.mc_server).register();
     }
 
     /**
@@ -94,8 +94,8 @@ public class PrometheusExporterMod {
     private void initHttpServer() throws IOException {
         // WARNING: Make sure the HTTP server thread is daemonized, otherwise the
         // Minecraft server process will not properly terminate.
-        String address = ExporterConfig.listen_address;
-        int port = ExporterConfig.listen_port;
+        String address = ExporterConfig.web.listen_address;
+        int port = ExporterConfig.web.listen_port;
         try {
             this.http_server = new HTTPServer(address, port, true);
             LOG.info("Listening on {}:{}", address, port);

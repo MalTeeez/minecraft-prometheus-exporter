@@ -77,7 +77,7 @@ public class Ticks extends BaseCollector {
 
     @EventBusSubscriber.Condition
     public static boolean enabled() {
-        return ExporterConfig.ticks;
+        return ExporterConfig.collector.ticks;
     }
 
     @Override

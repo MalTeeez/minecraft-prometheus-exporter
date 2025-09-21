@@ -10,7 +10,13 @@ import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.github.cpburnz.minecraft_prometheus_exporter.collectors.*;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.Chunks;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.Entities;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.PlayerStatistics;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.Players;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.Teams;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.Ticks;
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.TileEntities;
 import com.github.cpburnz.minecraft_prometheus_exporter.commands.ForgePrometheusCommand;
 import com.github.cpburnz.minecraft_prometheus_exporter.prometheus_exporter.Tags;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;

@@ -51,6 +51,7 @@ public class ExporterConfig {
         public boolean teams;
 
         @Config.RangeInt(min = 0, max = 4)
+        @Config.DefaultInt(4)
         @Config.Comment("What permission level should be required to restart the exporter")
         public int command_permission_level;
 

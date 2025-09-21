@@ -5,12 +5,12 @@ import java.net.BindException;
 
 import javax.annotation.Nullable;
 
-import com.github.cpburnz.minecraft_prometheus_exporter.collectors.*;
 import net.minecraft.server.MinecraftServer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.github.cpburnz.minecraft_prometheus_exporter.collectors.*;
 import com.github.cpburnz.minecraft_prometheus_exporter.commands.ForgePrometheusCommand;
 import com.github.cpburnz.minecraft_prometheus_exporter.prometheus_exporter.Tags;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;

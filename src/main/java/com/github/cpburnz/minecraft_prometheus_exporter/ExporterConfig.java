@@ -56,23 +56,23 @@ public class ExporterConfig {
 
         @Config.DefaultEnum("LOG")
         @Config.Comment("""
-                Configure how to handle dimension (world) tick errors. Some mods
-                handle the tick events for their custom dimensions, and may not
-                reliably start and stop ticks as expected.
-                
-                  IGNORE: Ignore tick errors. If a mod really botches tick
-                events, it could emit up to 20 log statements per second for
-                each dimension. This would cause large ballooning of the
-                "logs/debug.txt" file. Use this setting, or figure out how to
-                filter out DEBUG messages for
-                "com.github.cpburnz.minecraft_prometheus_exporter.collectors.Ticks/"
-                in "log4j2.xml".
-                
-                  LOG: Log tick errors. This is the new default.
-                
-                  STRICT: Raise an exception on tick error. This will crash the
-                server if an error occurs.
-                """)
+            Configure how to handle dimension (world) tick errors. Some mods
+            handle the tick events for their custom dimensions, and may not
+            reliably start and stop ticks as expected.
+
+              IGNORE: Ignore tick errors. If a mod really botches tick
+            events, it could emit up to 20 log statements per second for
+            each dimension. This would cause large ballooning of the
+            "logs/debug.txt" file. Use this setting, or figure out how to
+            filter out DEBUG messages for
+            "com.github.cpburnz.minecraft_prometheus_exporter.collectors.Ticks/"
+            in "log4j2.xml".
+
+              LOG: Log tick errors. This is the new default.
+
+              STRICT: Raise an exception on tick error. This will crash the
+            server if an error occurs.
+            """)
         public TickErrorPolicy collector_mc_dimension_tick_errors;
     }
 

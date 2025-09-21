@@ -1,19 +1,22 @@
 package com.github.cpburnz.minecraft_prometheus_exporter.collectors;
 
-import com.mojang.authlib.GameProfile;
-import gnu.trove.map.hash.THashMap;
-import io.prometheus.client.GaugeMetricFamily;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
 import net.minecraft.stats.StatisticsFile;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import com.mojang.authlib.GameProfile;
+
+import gnu.trove.map.hash.THashMap;
+import io.prometheus.client.GaugeMetricFamily;
 
 public class PlayerStatistics extends BaseCollector {
 
@@ -33,7 +36,6 @@ public class PlayerStatistics extends BaseCollector {
      */
     protected static final int PLAYERS_INIT = 20;
 
-
     /**
      * The initial capacity to use for the stat names map. This was counted from
      * StatList.
@@ -48,15 +50,9 @@ public class PlayerStatistics extends BaseCollector {
 
     private static GaugeMetricFamily newMetric() {
         return new GaugeMetricFamily(
-                "mc_player_stat_total",
-                "The general stats about players.",
-                Arrays.asList(
-                        "code",
-                        "name",
-                        "player_id",
-                        "player_name"
-                )
-        );
+            "mc_player_stat_total",
+            "The general stats about players.",
+            Arrays.asList("code", "name", "player_id", "player_name"));
     }
 
     @Override
@@ -68,13 +64,16 @@ public class PlayerStatistics extends BaseCollector {
 
             // Get player info.
             // - WARNING: Either "id" or "name" can be null in Minecraft 1.19 and
-            //   earlier.
-            @Nullable UUID player_id = profile.getId();
-            @Nullable String player_name = profile.getName();
+            // earlier.
+            @Nullable
+            UUID player_id = profile.getId();
+            @Nullable
+            String player_name = profile.getName();
 
             if (player_id != null && player_name != null) {
                 StatisticsFile stats = player.func_147099_x();
-                @Nullable PlayerInfo player_info = this.players.get(player_id);
+                @Nullable
+                PlayerInfo player_info = this.players.get(player_id);
                 if (player_info != null) {
                     player_info.name = player_name;
                     player_info.stats = stats;
@@ -97,20 +96,17 @@ public class PlayerStatistics extends BaseCollector {
                 // - NOTICE: Despite its name, this reads the value.
                 int stat_val = stats.writeStat(stat);
                 String stat_code = stat.statId;
-                @Nullable String stat_name = this.stat_names.get(stat);
+                @Nullable
+                String stat_name = this.stat_names.get(stat);
                 if (stat_name == null) {
                     // Cache stat name.
-                    stat_name = stat.func_150951_e().getUnformattedText();
+                    stat_name = stat.func_150951_e()
+                        .getUnformattedText();
                     this.stat_names.put(stat, stat_name);
                 }
 
                 // Record score.
-                metric.addMetric(Arrays.asList(
-                        stat_code,
-                        stat_name,
-                        player_id_str,
-                        player_name
-                ), stat_val);
+                metric.addMetric(Arrays.asList(stat_code, stat_name, player_id_str, player_name), stat_val);
             }
         }
         return Arrays.asList(metric);
@@ -146,8 +142,8 @@ public class PlayerStatistics extends BaseCollector {
         /**
          * Constructs the PlayerInfo instance.
          *
-         * @param id The player id.
-         * @param name The player name.
+         * @param id    The player id.
+         * @param name  The player name.
          * @param stats The statistics file.
          */
         PlayerInfo(UUID id, String name, StatisticsFile stats) {
